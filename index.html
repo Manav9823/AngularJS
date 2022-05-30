@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+  <head>
+    <title>TheNetNinja Angular Playlist</title>
+    <script src="./app/lib/angular.min.js"></script>
+    <script src="app/app.js"></script>
+    <link href="content/css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!-- <p>Name : <input type="text" ng-model="firstname"></p>
+    <p>You wrote:{{firstname}}</p>
+    <div ng-init="names=['manav','bansal','gani','aaa']">
+      <ul>
+        <li ng-repeat="x in names">
+          {{x}}
+        </li>
+      </ul>
+
+    // root-scope example  
+    </div> -->
+    <!-- <div>
+     {{message}}
+    </div> -->
+    
+    <!-- my scope example  -->
+    <!-- <div ng-controller="myctrl">
+      <h1>{{message}}</h1>
+      <ul>
+        <li ng-repeat="x in arr">{{ x }}</li>
+      </ul>
+    </div> -->
+
+    <!-- including common files  -->
+    <header ng-include="'header.html'"></header>
+    <div class="content">
+      <div ng-controller='newctrl'>
+        <button ng-click="order = 'name'">Order by name</button>
+        <button ng-click="order = 'belt'">Order by belt</button>
+        <p> <input type="text" ng-model="search" placeholder='Search'></p>
+        <ul> 
+          <li ng-repeat="x in obj | orderBy:order| filter:search" ng-show="x.avaliable">
+              <h3>{{x.name }} : {{x.rate | currency}} </h3>
+          <div class="remove" ng-click="remove(x)">x</div>
+          <span class="belt" style="color:black" >{{x.belt}}</span>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
