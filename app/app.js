@@ -1,4 +1,23 @@
-let myapp = angular.module('myapp',[])
+let myapp = angular.module('myapp',['ngRoute','ngAnimate'])
+.config(['$locationProvider', function($locationProvider) {
+    $locationProvider.hashPrefix('');
+}]);
+
+
+
+myapp.config(['$routeProvider',function($routeProvider){
+  $routeProvider
+  .when('/directory',{
+    templateUrl:'views/directory.html',
+    controller:'newctrl'
+  }).when('/contact',{
+    templateUrl:'views/contact.html'
+  }).when('/home',{
+    templateUrl:'views/home.html'
+  }).otherwise({
+    redirectTo:'/home'
+  })
+}])
 
 
 // Not working
@@ -14,7 +33,7 @@ myapp.controller('myctrl',function($scope){
 
 // filter method
 
-myapp.controller('newctrl',function($scope){
+myapp.controller('newctrl',[ '$scope','$http',function($scope,$http){
   
   // remove function on click
   $scope.remove = function(ninja){
@@ -23,26 +42,23 @@ myapp.controller('newctrl',function($scope){
     console.log(ninjaidx)
     $scope.obj.splice(ninjaidx,1)
   }
+
+  $scope.add = function(){
+    $scope.obj.push({
+      name:$scope.newninja.name,
+      belt:$scope.newninja.belt,
+      rate:$scope.newninja.rate,
+      avaliable:true
+    })
+
+    $scope.newninja.name=''
+    $scope.newninja.rate=''
+    $scope.newninja.belt=''
+  }
   
-  $scope.obj=[
-    {
-      name:'Manav',
-      belt:'red',
-      rate:4,
-      avaliable:true
-    },
-    {
-      name:'New',
-      belt:'blue',
-      rate:3,
-      avaliable:true
-    },
-    {
-      name:'Old',
-      belt:'yellow',
-      rate:6,
-      avaliable:true
-    }
-  ]
-})
+  $http.get('data/ninja.json').then(function(data){
+    $scope.obj=data.data
+  })
+
+}])
 

@@ -1,0 +1,5 @@
+[
+  {"name":"Manav","belt":"red","rate":4,"avaliable":true},
+  {"name":"New","belt":"blue","rate":3,"avaliable":true},
+  {"name":"Old","belt":"yellow","rate":6,"avaliable":true}
+]
